@@ -23,7 +23,5 @@ public class FileLineReaderImpl implements LineReader {
     } catch (IOException e) {
       throw new ArrayDataException("Failed to read file: " + filePath, e);
     }
-  
   }
-  
 }

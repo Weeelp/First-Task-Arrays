@@ -12,7 +12,7 @@ public class ArrayLineParserImpl implements ArrayParser {
   @Override
   public double[] parse(String line) throws ArrayValidationException {
     if (line.strip().isBlank()) {
-      throw new ArrayValidationException("Parse: nothing to parse");
+      return null;
     }
 
     String[] tokens = line.strip().split(SPLIT_REGEX);

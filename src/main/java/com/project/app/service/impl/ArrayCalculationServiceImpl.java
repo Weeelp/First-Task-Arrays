@@ -1,6 +1,7 @@
 package com.project.app.service.impl;
 
 import com.project.app.entity.DoubleArrayWrapper;
+import com.project.app.exception.ArrayValidationException;
 import com.project.app.service.ArrayCalculationService;
 
 import java.util.Optional;
@@ -8,7 +9,7 @@ import java.util.Optional;
 public class ArrayCalculationServiceImpl implements ArrayCalculationService {
 
   @Override
-  public Optional<Double> findMin(DoubleArrayWrapper array) {
+  public Optional<Double> findMin(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
       return Optional.empty();
     }
@@ -23,7 +24,7 @@ public class ArrayCalculationServiceImpl implements ArrayCalculationService {
   }
 
   @Override
-  public Optional<Double> findMax(DoubleArrayWrapper array) {
+  public Optional<Double> findMax(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
       return Optional.empty();
     }
@@ -38,7 +39,7 @@ public class ArrayCalculationServiceImpl implements ArrayCalculationService {
   }
 
   @Override
-  public Optional<Double> calculateSum(DoubleArrayWrapper array) {
+  public Optional<Double> calculateSum(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
       return Optional.empty();
     }
@@ -50,7 +51,7 @@ public class ArrayCalculationServiceImpl implements ArrayCalculationService {
   }
 
   @Override
-  public Optional<Double> calculateAverage(DoubleArrayWrapper array) {
+  public Optional<Double> calculateAverage(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
       return Optional.empty();
     }

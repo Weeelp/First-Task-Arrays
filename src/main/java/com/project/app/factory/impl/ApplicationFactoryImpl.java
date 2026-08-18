@@ -17,8 +17,8 @@ import com.project.app.validation.impl.ArrayLineValidatorImpl;
 public class ApplicationFactoryImpl implements ApplicationFactory {
 
   @Override
-  public Application assemble() {
-    LineReader fileReader = new FileLineReaderImpl("tasks.txt");
+  public Application assemble(String filePath) {
+    LineReader fileReader = new FileLineReaderImpl(filePath);
     ArrayFactory arrFactory = new DoubleArrayFactoryImpl();
     ArrayValidator validator = new ArrayLineValidatorImpl();
     ArrayParser parser = new ArrayLineParserImpl();

@@ -14,7 +14,13 @@ public class DoubleArrayWrapper extends AbstractArrayWrapper {
     this.elements = elements.clone();
   }
 
-  public double getElement (int index) { return elements[index]; }
+  public double getElement (int index) throws ArrayValidationException { 
+    if (elements == null || index < 0 || index >= elements.length) {
+        throw new ArrayValidationException("Некорректный индекс массива: " + index);
+    }
+    
+    return elements[index]; 
+  }
 
   public int size() { return elements.length; }
 

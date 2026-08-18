@@ -6,7 +6,7 @@ import java.util.List;
 import com.project.app.validation.ArrayValidator;
 
 public class ArrayLineValidatorImpl implements ArrayValidator {
-  private static final String ALLOWED_CHARACTERS = "^[\\d.,;\\s\\-–_/\\\\|]+$";
+  private static final String ALLOWED_CHARACTERS = "^[\\d.,;\\s\\-_/\\\\|]+$";
 
   @Override
   public List<String> validate(String line) {

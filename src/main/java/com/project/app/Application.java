@@ -53,6 +53,11 @@ public class Application {
         }
 
         double[] elementsArray = parser.parse(line);
+
+        if(elementsArray == null || elementsArray.length == 0){
+          continue;
+        }
+        
         DoubleArrayWrapper arr = arrFactory.create(elementsArray);
         logger.info("Created array: {}", arr);
         
@@ -67,6 +72,7 @@ public class Application {
                 min.orElse(0.0), max.orElse(0.0), sum.orElse(0.0));
         logger.info("Merge sort: {}", mergeSortArr);
         logger.info("Selection sort: {}", selectionSortArr);
+
       }
 
       logger.info("File read successfully");
@@ -77,7 +83,7 @@ public class Application {
 
   public static void main(String[] args) {
     ApplicationFactory assembler = new ApplicationFactoryImpl();
-    Application app = assembler.assemble();
+    Application app = assembler.assemble("tasks.txt");
     app.run();
   }
 }
