@@ -19,9 +19,6 @@ public class ArrayLineParserImpl implements ArrayParser {
 
     List<Double> numbers = new ArrayList<>();
     for (String token : tokens) {
-      if (token.isBlank()) {
-        continue;
-      }
        try {
         numbers.add(Double.parseDouble(token));
       } catch (NumberFormatException e) {
