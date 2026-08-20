@@ -1,22 +1,17 @@
 package com.project.app.factory.impl;
 
 import com.project.app.Application;
-import com.project.app.factory.ApplicationFactory;
-import com.project.app.factory.ArrayFactory;
+import com.project.app.factory.*;
 import com.project.app.parser.ArrayParser;
 import com.project.app.parser.impl.ArrayLineParserImpl;
 import com.project.app.reader.LineReader;
 import com.project.app.reader.impl.FileLineReaderImpl;
 import com.project.app.repository.ArrayRepository;
 import com.project.app.repository.impl.DoubleArrayRepositoryImpl;
-import com.project.app.service.ArrayCalculationService;
-import com.project.app.service.ArrayService;
-import com.project.app.service.ArraySortService;
-import com.project.app.service.impl.ArrayCalculationServiceImpl;
-import com.project.app.service.impl.ArrayServiceImpl;
-import com.project.app.service.impl.ArraySortServiceImpl;
-import com.project.app.validation.ArrayValidator;
-import com.project.app.validation.impl.ArrayLineValidatorImpl;
+import com.project.app.service.*;
+import com.project.app.service.impl.*;
+import com.project.app.validator.ArrayValidator;
+import com.project.app.validator.impl.ArrayLineValidatorImpl;
 
 public class ApplicationFactoryImpl implements ApplicationFactory {
 

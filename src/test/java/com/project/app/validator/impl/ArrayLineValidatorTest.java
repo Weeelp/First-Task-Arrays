@@ -1,8 +1,9 @@
-package com.project.app.validation.impl;
-
-import com.project.app.validation.ArrayValidator;
+package com.project.app.validator.impl;
 
 import org.junit.jupiter.api.Test;
+
+import com.project.app.validator.ArrayValidator;
+import com.project.app.validator.impl.ArrayLineValidatorImpl;
 
 import java.util.List;
 

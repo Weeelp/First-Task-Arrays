@@ -31,7 +31,7 @@ public class DoubleArrayWrapper extends AbstractArrayWrapper {
   }
 
   public double[] getAll () {     
-    return elements; 
+    return elements.clone(); 
   }
 
   public int size() { return elements.length; }

@@ -12,7 +12,7 @@ import com.project.app.observer.impl.ArrayObserverImpl;
 import com.project.app.parser.ArrayParser;
 import com.project.app.reader.LineReader;
 import com.project.app.service.*;
-import com.project.app.validation.ArrayValidator;
+import com.project.app.validator.ArrayValidator;
 
 import java.util.List;
 

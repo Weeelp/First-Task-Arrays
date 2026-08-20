@@ -1,4 +1,4 @@
-package com.project.app.validation;
+package com.project.app.validator;
 
 import java.util.List;
 

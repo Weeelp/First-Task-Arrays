@@ -1,9 +1,9 @@
-package com.project.app.validation.impl;
+package com.project.app.validator.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.app.validation.ArrayValidator;
+import com.project.app.validator.ArrayValidator;
 
 public class ArrayLineValidatorImpl implements ArrayValidator {
   private static final String ALLOWED_CHARACTERS = "^[\\d.,;\\s\\-_/\\\\|]+$";
