@@ -1,10 +1,7 @@
 package com.project.app.repository.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import com.project.app.entity.AbstractArrayWrapper;
 import com.project.app.repository.ArrayRepository;
@@ -12,10 +9,10 @@ import com.project.app.repository.specification.ArraySpecification;
 
 public class DoubleArrayRepositoryImpl implements ArrayRepository {
   private static DoubleArrayRepositoryImpl instance;
-  private Map<Integer, AbstractArrayWrapper> doubleArr;
+  private List<AbstractArrayWrapper> doubleArr;
 
   private DoubleArrayRepositoryImpl() {
-    this.doubleArr = new HashMap<>();
+    this.doubleArr = new ArrayList<>();
   }
 
   public static DoubleArrayRepositoryImpl getInstance(){
@@ -27,22 +24,12 @@ public class DoubleArrayRepositoryImpl implements ArrayRepository {
 
   @Override
   public boolean save(AbstractArrayWrapper arr) {
-    doubleArr.put(arr.getId(), arr);
+    doubleArr.add(arr);
     return true;
   }
 
   @Override
-  public Optional<AbstractArrayWrapper> findById(int id) {
-    return Optional.ofNullable(doubleArr.get(id));
-  }
-
-  @Override
-  public List<AbstractArrayWrapper> findAll() {
-    return new ArrayList<>(doubleArr.values());
-  }
-
-  @Override
-  public boolean deleteById(int id) {
+  public boolean remove(int id) {
     return doubleArr.remove(id) != null;
   }
 
@@ -53,7 +40,7 @@ public class DoubleArrayRepositoryImpl implements ArrayRepository {
   @Override
   public List<AbstractArrayWrapper> query(ArraySpecification specification) {
     List<AbstractArrayWrapper> result = new ArrayList<>();
-    for (AbstractArrayWrapper arr: doubleArr.values()) {
+    for (AbstractArrayWrapper arr: doubleArr) {
       if (specification.specify(arr)) {
         result.add(arr);
       }
