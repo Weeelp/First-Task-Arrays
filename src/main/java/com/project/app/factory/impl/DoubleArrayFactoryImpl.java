@@ -5,7 +5,7 @@ import com.project.app.exception.ArrayValidationException;
 import com.project.app.factory.ArrayFactory;
 
 public class DoubleArrayFactoryImpl implements ArrayFactory {
-  private long idCounter;
+  private int idCounter;
 
   @Override 
   public DoubleArrayWrapper create(double[] elements) throws ArrayValidationException{

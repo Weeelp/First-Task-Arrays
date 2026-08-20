@@ -5,7 +5,7 @@ import com.project.app.exception.ArrayValidationException;
 import com.project.app.service.ArrayCalculationService;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
+import java.util.OptionalDouble;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +24,7 @@ public class ArrayCalculationServiceImplTest {
         ArrayCalculationService service = new ArrayCalculationServiceImpl();
 
         // when
-        Optional<Double> actual = service.findMin(array);
+        OptionalDouble actual = service.findMin(array);
 
         // then
         assertEquals(EXPECTED_MIN, actual.orElse(0.0));
@@ -37,7 +37,7 @@ public class ArrayCalculationServiceImplTest {
         ArrayCalculationService service = new ArrayCalculationServiceImpl();
 
         // when
-        Optional<Double> actual = service.findMax(array);
+        OptionalDouble actual = service.findMax(array);
 
         // then
         assertEquals(EXPECTED_MAX, actual.orElse(0.0));
@@ -50,7 +50,7 @@ public class ArrayCalculationServiceImplTest {
         ArrayCalculationService service = new ArrayCalculationServiceImpl();
 
         // when
-        Optional<Double> actual = service.calculateSum(array);
+        OptionalDouble actual = service.calculateSum(array);
 
         // then
         assertEquals(EXPECTED_SUM, actual.orElse(0.0));

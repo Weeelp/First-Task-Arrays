@@ -4,14 +4,14 @@ import com.project.app.entity.DoubleArrayWrapper;
 import com.project.app.exception.ArrayValidationException;
 import com.project.app.service.ArrayCalculationService;
 
-import java.util.Optional;
+import java.util.OptionalDouble;
 
 public class ArrayCalculationServiceImpl implements ArrayCalculationService {
 
   @Override
-  public Optional<Double> findMin(DoubleArrayWrapper array) throws ArrayValidationException {
+  public OptionalDouble findMin(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
-      return Optional.empty();
+      return OptionalDouble.empty();
     }
     double min = array.getElement(0);
     for (int i = 1; i < array.size(); i++) {
@@ -20,13 +20,13 @@ public class ArrayCalculationServiceImpl implements ArrayCalculationService {
         min = current;
       }
     }
-    return Optional.of(min);
+    return OptionalDouble.of(min);
   }
 
   @Override
-  public Optional<Double> findMax(DoubleArrayWrapper array) throws ArrayValidationException {
+  public OptionalDouble findMax(DoubleArrayWrapper array) throws ArrayValidationException  {
     if (array == null) {
-      return Optional.empty();
+      return OptionalDouble.empty();
     }
     double max = array.getElement(0);
     for (int i = 1; i < array.size(); i++) {
@@ -35,31 +35,31 @@ public class ArrayCalculationServiceImpl implements ArrayCalculationService {
         max = current;
       }
     }
-    return Optional.of(max);
+    return OptionalDouble.of(max);
   }
 
   @Override
-  public Optional<Double> calculateSum(DoubleArrayWrapper array) throws ArrayValidationException {
+  public OptionalDouble calculateSum(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
-      return Optional.empty();
+      return OptionalDouble.empty();
     }
     double sum = 0.0;
     for (int i = 0; i < array.size(); i++) {
       sum = sum + array.getElement(i);
     }
-    return Optional.of(sum);
+    return OptionalDouble.of(sum);
   }
 
   @Override
-  public Optional<Double> calculateAverage(DoubleArrayWrapper array) throws ArrayValidationException {
+  public OptionalDouble calculateAverage(DoubleArrayWrapper array) throws ArrayValidationException {
     if (array == null) {
-      return Optional.empty();
+      return OptionalDouble.empty();
     }
-    Optional<Double> sum = calculateSum(array);
+    OptionalDouble sum = calculateSum(array);
     if (sum.isPresent()) {
-      double average = sum.get() / array.size();
-      return Optional.of(average);
+      double average = sum.getAsDouble() / array.size();
+      return OptionalDouble.of(average);
     }
-    return Optional.empty();
+    return OptionalDouble.empty();
   }
 }

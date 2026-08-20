@@ -5,27 +5,29 @@ import org.apache.logging.log4j.Logger;
 
 import com.project.app.entity.DoubleArrayWrapper;
 import com.project.app.exception.*;
-import com.project.app.factory.ApplicationFactory;
-import com.project.app.factory.ArrayFactory;
+import com.project.app.factory.*;
 import com.project.app.factory.impl.ApplicationFactoryImpl;
+import com.project.app.observer.ArrayObserver;
+import com.project.app.observer.impl.ArrayObserverImpl;
 import com.project.app.parser.ArrayParser;
 import com.project.app.reader.LineReader;
-import com.project.app.service.ArrayCalculationService;
-import com.project.app.service.ArraySortService;
+import com.project.app.service.*;
 import com.project.app.validation.ArrayValidator;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Application {
-  private static final Logger logger = LogManager.getLogger();
+  private static final Logger log = LogManager.getLogger();
 
-  private final ArrayFactory arrFactory;
+  private final LineReader reader;
   private final ArrayValidator validator;
   private final ArrayParser parser;
-  private final LineReader reader;
+  private final ArrayFactory arrFactory;
+  @SuppressWarnings("unused")
   private final ArrayCalculationService calcService;
+  @SuppressWarnings("unused")
   private final ArraySortService sortService;
+  private final ArrayService arrService;
 
   public Application(
           LineReader readerValue,
@@ -33,22 +35,25 @@ public class Application {
           ArrayValidator validator,
           ArrayParser parser,
           ArrayCalculationService calcService, 
-          ArraySortService sortService) {
+          ArraySortService sortService,
+          ArrayService arrService) {
     this.reader = readerValue;
     this.arrFactory = arrFactory;
     this.validator = validator;
     this.parser = parser;
     this.calcService = calcService;
     this.sortService = sortService;
+    this.arrService = arrService;
   }
 
   public void run() {
     try {
       List<String> lines = reader.readLines();
+      ArrayObserver observer = new ArrayObserverImpl();
       for (String line : lines) {
         List<String> errors = validator.validate(line);
         if (!errors.isEmpty()){
-          logger.warn("Invalid line: {}", line);
+          log.warn("Invalid line: {}", line);
           continue;
         }
 
@@ -59,25 +64,20 @@ public class Application {
         }
         
         DoubleArrayWrapper arr = arrFactory.create(elementsArray);
-        logger.info("Created array: {}", arr);
+        arr.setObserver(observer);
+        observer.handleEvent(arr);
+        arrService.add(arr);
+        log.info("Created array: {}\n", arr);
+        log.info(arrService.getAllSortedByFirstElement()+"\n");
+        log.info(arrService.findArrayWithSumGreaterThan(1)+"\n");
+        log.info(arrService.getAll()+"\n");
         
-        Optional<Double> min = calcService.findMin(arr);
-        Optional<Double> max = calcService.findMax(arr);
-        Optional<Double> sum = calcService.calculateSum(arr);
-
-        double[] mergeSortArr = sortService.sortMerge(arr);
-        double[] selectionSortArr = sortService.sortSelection(arr);
-
-        logger.info("Min: {}, Max: {}, Sum: {}", 
-                min.orElse(0.0), max.orElse(0.0), sum.orElse(0.0));
-        logger.info("Merge sort: {}", mergeSortArr);
-        logger.info("Selection sort: {}", selectionSortArr);
-
+                
       }
 
-      logger.info("File read successfully");
+      log.info("File read successfully");
     } catch (ArrayDataException | ArrayValidationException e) {
-        logger.error("Failed to read data", e);
+        log.error("Failed to read data", e);
     }
   }
 

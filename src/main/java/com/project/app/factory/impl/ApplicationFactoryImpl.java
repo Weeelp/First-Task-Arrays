@@ -7,9 +7,13 @@ import com.project.app.parser.ArrayParser;
 import com.project.app.parser.impl.ArrayLineParserImpl;
 import com.project.app.reader.LineReader;
 import com.project.app.reader.impl.FileLineReaderImpl;
+import com.project.app.repository.ArrayRepository;
+import com.project.app.repository.impl.DoubleArrayRepositoryImpl;
 import com.project.app.service.ArrayCalculationService;
+import com.project.app.service.ArrayService;
 import com.project.app.service.ArraySortService;
 import com.project.app.service.impl.ArrayCalculationServiceImpl;
+import com.project.app.service.impl.ArrayServiceImpl;
 import com.project.app.service.impl.ArraySortServiceImpl;
 import com.project.app.validation.ArrayValidator;
 import com.project.app.validation.impl.ArrayLineValidatorImpl;
@@ -24,8 +28,16 @@ public class ApplicationFactoryImpl implements ApplicationFactory {
     ArrayParser parser = new ArrayLineParserImpl();
     ArrayCalculationService calcService = new ArrayCalculationServiceImpl();
     ArraySortService sortService = new ArraySortServiceImpl();
+    ArrayRepository arrRepository = DoubleArrayRepositoryImpl.getInstance();
+    ArrayService arrService = new ArrayServiceImpl(arrRepository);
 
-    return new Application(fileReader, arrFactory, validator, parser, calcService, sortService);
+    return new Application(fileReader, 
+      arrFactory, 
+      validator, 
+      parser, 
+      calcService, 
+      sortService, 
+      arrService);
   }
   
 }

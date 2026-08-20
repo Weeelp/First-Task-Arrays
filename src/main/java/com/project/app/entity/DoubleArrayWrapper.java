@@ -5,7 +5,7 @@ import com.project.app.exception.ArrayValidationException;
 public class DoubleArrayWrapper extends AbstractArrayWrapper {
   private final double[] elements;
 
-  public DoubleArrayWrapper (long id, double[] elements) throws ArrayValidationException{
+  public DoubleArrayWrapper (int id, double[] elements) throws ArrayValidationException{
     super(id);
 
     if (elements == null) {
@@ -14,12 +14,24 @@ public class DoubleArrayWrapper extends AbstractArrayWrapper {
     this.elements = elements.clone();
   }
 
-  public double getElement (int index) throws ArrayValidationException { 
-    if (elements == null || index < 0 || index >= elements.length) {
-        throw new ArrayValidationException("Некорректный индекс массива: " + index);
+  public double getElement (int ind) throws ArrayValidationException { 
+    if (elements == null || ind < 0 || ind >= elements.length) {
+        throw new ArrayValidationException("Invalid array ind: " + ind);
     }
     
-    return elements[index]; 
+    return elements[ind]; 
+  }
+
+  public void setElement(int ind, double newValue) throws ArrayValidationException {
+    if (ind < 0 || ind >= elements.length) {
+      throw new ArrayValidationException("Invalid array ind: " + ind);
+    }
+    this.elements[ind] = newValue;
+    notifyObserver(); 
+  }
+
+  public double[] getAll () {     
+    return elements; 
   }
 
   public int size() { return elements.length; }
